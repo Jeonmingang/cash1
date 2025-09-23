@@ -1,0 +1,23 @@
+name: UltimateDonate
+main: com.minkang.ultimate.DonateAutomationPlugin
+version: 1.1.0
+api-version: 1.16
+author: Minkang
+softdepend: [Vault]
+commands:
+  후원:
+    description: 후원/문화상품권 명령어
+    usage: /후원 도움말
+    aliases: [donate, 문상]
+    permission: ultimate.donate
+    permission-message: 권한이 없습니다.
+  후원관리:
+    description: 후원 관리자 명령어
+    usage: /후원관리 도움말
+    aliases: [donateadmin]
+    permission: ultimate.donate.admin
+permissions:
+  ultimate.donate:
+    default: true
+  ultimate.donate.admin:
+    default: op
