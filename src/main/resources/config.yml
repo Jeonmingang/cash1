@@ -1,0 +1,53 @@
+microservice:
+  baseUrl: "http://127.0.0.1:3100"
+  apiKey: "CHANGE_ME"
+  timeoutSeconds: 10
+  serverId: "DefaultServer"
+
+security:
+  hmacSecret: "CHANGE_ME"
+
+webhook:
+  enabled: true
+  bind: "127.0.0.1"
+  port: 27111
+  pathDeposit: "/webhook/deposit"
+  pathGift: "/webhook/gift"
+
+bank:
+  mode: "MANUAL_MEMO"
+  provider: "toss"
+  createEndpoint: "/bank/create"
+  depositorPrefix: "MKG"
+  expiresMinutes: 120
+
+gift:
+  mode: "STORE_ONLY" # STORE_ONLY|VERIFY_ONLY|AUTO_REDEEM
+  verifyEndpoint: "/gift/verify"
+  redeemEndpoint: "/gift/redeem"
+  acceptedVendors:
+    - "cultureland"
+    - "happymoney"
+    - "booknlife"
+
+rewards:
+  wonPerCash: 100
+  minAmountWon: 1000
+  multipliers:
+    bank: 1.0
+    gift: 1.0
+  cashCommand: "캐시 지급 {player} {cash}"
+
+vault:
+  enabled: false
+
+messages:
+  prefix: "&6[후원]&r "
+  createdVA: "&a입금 계좌: &e{bank} {account} &7(주문ID {orderId})"
+  pending: "&7입금 확인 후 지급됩니다. 이체 메모에 &e{orderId}&7 를 꼭 넣어주세요."
+  redeemedGift: "&a문화상품권 &e{vendor}&a {value}원 확인되었습니다."
+  storedGift: "&e문화상품권 코드가 안전하게 저장되었습니다. 관리자 확인 후 지급됩니다."
+  invalidGift: "&c코드가 유효하지 않거나 사용되었습니다."
+  rewardGiven: "&a{cash} 캐시가 지급되었습니다."
+  error: "&c오류: {msg}"
+  reloaded: "&a설정이 리로드되었습니다."
