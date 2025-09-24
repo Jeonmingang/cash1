@@ -1,0 +1,77 @@
+microservice:
+  baseUrl: "http://127.0.0.1:3100"
+  apiKey: "CHANGE_ME"
+  timeoutSeconds: 10
+  serverId: "DefaultServer"
+
+security:
+  hmacSecret: "CHANGE_ME"
+
+webhook:
+  enabled: true
+  bind: "127.0.0.1"
+  port: 27111
+  pathDeposit: "/webhook/deposit"
+  pathGift: "/webhook/gift"
+
+bank:
+  mode: "MANUAL_MEMO"
+  provider: "toss"
+  createEndpoint: "/bank/create"
+  depositorPrefix: "MKG"
+  expiresMinutes: 120
+
+gift:
+  mode: "STORE_ONLY" # STORE_ONLY|VERIFY_ONLY|AUTO_REDEEM
+  verifyEndpoint: "/gift/verify"
+  redeemEndpoint: "/gift/redeem"
+  acceptedVendors:
+    - "cultureland"
+    - "happymoney"
+    - "booknlife"
+
+rewards:
+  wonPerCash: 100
+  minAmountWon: 1000
+  multipliers:
+    bank: 1.0
+    gift: 1.0
+  cashCommand: "캐시 지급 {player} {cash}"
+
+vault:
+  enabled: false
+
+messages:
+  prefix: "&6[후원]&r "
+  createdVA: "&a입금 계좌: &e{bank} {account} &7(주문ID {orderId})"
+  pending: "&7입금 확인 후 지급됩니다. 이체 메모에 &e{orderId}&7 를 꼭 넣어주세요."
+  redeemedGift: "&a문화상품권 &e{vendor}&a {value}원 확인되었습니다."
+  storedGift: "&e문화상품권 코드가 안전하게 저장되었습니다. 관리자 확인 후 지급됩니다."
+  invalidGift: "&c코드가 유효하지 않거나 사용되었습니다."
+  rewardGiven: "&a{cash} 캐시 지급 완료! (배수 {mult}, 원화 {won})"
+  error: "&c오류: {msg}"
+  reloaded: "&a설정이 리로드되었습니다."
+
+
+legal:
+  enabled: true
+  policyVersion: "2025-09"
+  requireConsentFor:
+    bank: true
+    gift: false
+  summaryLines:
+    - "디지털 재화(캐시/아이템)는 결제 즉시 제공됩니다."
+    - "공급 시작에 동의하면 단순변심 청약철회가 제한됩니다."
+    - "오류·미지급 등 사업자 귀책 시에는 관련 기준에 따라 처리합니다."
+  underageNotice: "미성년자 결제는 법정대리인 동의가 없으면 취소가 가능할 수 있습니다."
+  contact:
+    email: "admin@example.com"
+    discord: "https://discord.gg/yourserver"
+    sla: "영업일 기준 3일 이내 회신"
+  reference: "국가법령정보센터(법령정보): https://www.law.go.kr/"
+
+messages:
+  legalHeader: "&c&l[중요 안내]&r"
+  legalPromptBank: "&e'/후원 동의 {amount}' 를 입력하면 계속 진행됩니다."
+  legalPromptGift: "&e'/후원 동의코드 {code} {vendor}' 를 입력하면 계속 진행됩니다."
+  legalAccepted: "&a동의가 확인되었습니다. 주문을 생성합니다..."
